@@ -1,0 +1,23 @@
+$ npm i -g nodemon
+$ npm i body-parser
+nodemon sever.js
+
+6:Crear un servidor HTTP desde NodeJS
+
+$ npm i express
+$ node server
+
+
+$ npm init
+
+------------
+package name: (curso-de-node.js---base-de-datos-con-mongodb-y-websockets) backendnode                                                           
+version: (1.0.0) 0.1.0                                                                                                                          
+description: Un chat como telegram, pero mucho mejor
+entry point: (index.js) server.js                                                                                                               
+test command:                                                                                                                                   
+git repository:                                                                                                                                 
+keywords: chat, telegram, server                                                                                                                
+author: James Jalz                                                                                                                              
+license: (ISC) MIT                                                                                                                              
+About to write to D:\Documents\Platzi\Curso de Node.js - Base de Datos con MongoDB y WebSockets\package.json:
