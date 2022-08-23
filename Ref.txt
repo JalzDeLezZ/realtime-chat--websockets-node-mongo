@@ -1,3 +1,7 @@
+file management 
+$ npm i multer
+
+
 $ npm i mongoose
 npm install dotenv
 
