@@ -4,8 +4,11 @@ const response = require("../../network/response");
 const controller = require("./controller");
 
 router.get("/", (req, res) => {
+
+  const filterMessages = req.query.user || null;
+
   controller
-    .getMessages()
+    .getMessages(filterMessages)
     .then((messageList) => {
       response.success(req, res, messageList, 200);
     })
@@ -25,9 +28,26 @@ router.post("/", (req, res) => {
     });
 });
 
-router.delete("/", (req, res) => {
-  console.log(req.body + "\n-----------\n" + req.body);
-  res.status(201).json();
+router.patch("/:idMessage", (req, res) => {
+  controller
+    .updateMessage(req.params.idMessage, req.body.message)
+    .then((data) => {
+      response.success(req, res, data, 200);
+    })
+    .catch((err) => {
+      response.error(req, res, "Internal Error", 500, err);
+    });
+});
+
+router.delete("/:identity", (req, res) => {
+
+  controller.mDeleteMsg(req.params.identity)
+  .then(() => {
+    response.success(req, res, `Usuario ${req.params.identity} eliminado`)
+  })
+  .catch(err => {
+    response.error(req, res, "Internal Error", 500, err)
+  })
 });
 
 module.exports = router;

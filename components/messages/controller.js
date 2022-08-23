@@ -18,13 +18,43 @@ function addMessage(user, message) {
   });
 }
 
-function getMessages() {
+function getMessages(filterUser) {
   return new Promise((resolve, reject) => {
-    resolve(store.list());
+    resolve(store.list(filterUser));
+  });
+}
+
+function updateMessage(pId, pMessage) {
+  return new Promise(async (resolve, reject) => {
+    if (!pId || !pMessage) {
+      reject("Invalid Data");
+      return false;
+    }
+
+    const result = await store.updateMessage(pId, pMessage);
+    resolve(result);
+  });
+}
+
+function mDeleteMsg (pId){
+  return new Promise((resolve, reject) => {
+    if(!pId){
+      reject("Invalid Id");
+      return false;
+    }
+    store.store_remove(pId)
+    .then(() => {
+      resolve()
+    })
+    .catch((err) => {
+      reject(err)
+    })
   });
 }
 
 module.exports = {
   addMessage,
-  getMessages
+  getMessages,
+  updateMessage,
+  mDeleteMsg,
 };
