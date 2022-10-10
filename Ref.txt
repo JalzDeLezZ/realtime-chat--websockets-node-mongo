@@ -1,3 +1,9 @@
+$ npm i cors
+JWS
+$ npm i express socket.io
+
+===================================================
+
 file management 
 $ npm i multer
 
@@ -18,7 +24,7 @@ $ node server
 
 
 $ npm init
-
+$ npm init -y
 ------------
 package name: (curso-de-node.js---base-de-datos-con-mongodb-y-websockets) backendnode                                                           
 version: (1.0.0) 0.1.0                                                                                                                          

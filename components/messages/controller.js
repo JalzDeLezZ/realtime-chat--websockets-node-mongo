@@ -1,4 +1,5 @@
 const store = require("./store");
+const { socket } = require("../../socket");
 
 function addMessage(chat, user, message, file) {
   return new Promise((resolve, reject) => {
@@ -8,10 +9,10 @@ function addMessage(chat, user, message, file) {
       return false;
     }
 
-    let fileUrl = '';
+    let fileUrl = "";
 
-    if(file){
-      fileUrl = 'http://localhost:3000/app/files/'+ file.filename;
+    if (file) {
+      fileUrl = "http://localhost:3000/app/files/" + file.filename;
     }
 
     const fullMessage = {
@@ -19,10 +20,13 @@ function addMessage(chat, user, message, file) {
       user: user,
       message: message,
       date: new Date(),
-      file: fileUrl
+      file: fileUrl,
     };
 
     store.add(fullMessage);
+
+    socket.io.emit("key_message", fullMessage);
+
     resolve(fullMessage);
   });
 }
@@ -45,19 +49,20 @@ function updateMessage(pId, pMessage) {
   });
 }
 
-function mDeleteMsg (pId){
+function mDeleteMsg(pId) {
   return new Promise((resolve, reject) => {
-    if(!pId){
+    if (!pId) {
       reject("Invalid Id");
       return false;
     }
-    store.store_remove(pId)
-    .then(() => {
-      resolve()
-    })
-    .catch((err) => {
-      reject(err)
-    })
+    store
+      .store_remove(pId)
+      .then(() => {
+        resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
   });
 }
 
